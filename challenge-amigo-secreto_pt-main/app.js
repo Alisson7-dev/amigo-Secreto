@@ -1,15 +1,12 @@
-let = listaAmigos = []
-
+let listaAmigos = []
 // Referência ao botão na página
-let botaoAdd = Document.getElementById('adtionamigo')
 let botaoSortear = document.getElementById('sorteioamigo')
  // Função que adiciona o valor do input na lista
 function adicionarAmigo(){
-
-    // Obter o valor do input
+ // Obter o valor do input
     const input = document.getElementById('amigo');
     const valor = input.value.trim();
-    if (valor) {
+    if(valor) {
         listaAmigos.push(valor);
         input.value = ''
         atualizarLista()
@@ -19,10 +16,6 @@ function adicionarAmigo(){
 
 }
 
-// Adicionar o valor à lista 
-listaAmigos.push(valor);
-
-
 atualizarLista();
 
 function atualizarLista(){
@@ -31,23 +24,34 @@ function atualizarLista(){
 
     listaAmigos.forEach((amigo) => {
         const li = document.createElement('li');
-        console.log(listaAmigos)
         li.textContent = amigo;
         listaElement.appendChild(li);
     });
 
 }
-document.getElementById('sorteioamigo').addEventListener(onclick, sortearAmigo);
 
+
+//função que sorteia aleatóriamente o amigo
 function sortearAmigo(){
-    let lista = document.querySelectorAll(listaAmigos);
-
-    if (lista.length === 0) {
+    
+   //verifica se o input nao esta vazio
+    if (listaAmigos.length === 0) {
         document.getElementById('resultado').textContent = "Não há participantes na lista!";
         return;
     }
-    let nomeAleatorio = Math.floor(Math.random() * listaAmigos.length);
-    let amigoSelecionado = lista[nomeAleatorio].textContent
+    //sorteia os nomes
+    else{
+        let indiceAleatorio = Math.floor(Math.random() * listaAmigos.length);
+        let nomeSorteado = listaAmigos[indiceAleatorio];
+        document.getElementById('resultado').textContent =`Seu amigo secreto é:  ${nomeSorteado}`;
+        listaAmigos.splice(indiceAleatorio, 1);
+        atualizarLista();
+        ocultarlista();
+    }
 };
-document.getElementById('resultado').textContent = amigoSelecionado;
-botaoAdicionar.addEventListener('', addAmigo);
+
+function ocultarlista(){
+   let  listaElement = document.getElementById('listaAmigos');
+   listaElement.innerHTML = '';
+}
+
