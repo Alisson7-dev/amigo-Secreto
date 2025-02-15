@@ -1,12 +1,8 @@
-
 let listaAmigos = []
-
 // Referência ao botão na página
 let botaoSortear = document.getElementById('sorteioamigo')
-
  // Função que adiciona o valor do input na lista
 function adicionarAmigo(){
-
  // Obter o valor do input
     const input = document.getElementById('amigo');
     const valor = input.value.trim();
